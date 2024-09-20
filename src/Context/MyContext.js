@@ -7,12 +7,13 @@ const UserProvider = ({ children }) => {
   const [onboarding, setOnboarding] = useState([])
   const [url, setUrl] = useState()
   const [role, setRole] = useState()
+  const [verified, setVerified] = useState(true)
 
   console.log(url)
   console.log("onboarding",onboarding)
   
   return (
-    <MyContext.Provider value={{login, setLogin, chathistory, setHistory, onboarding, setOnboarding, url, setUrl, role, setRole}}>
+    <MyContext.Provider value={{login, setLogin, chathistory, setHistory, onboarding, setOnboarding, url, setUrl, role, setRole, verified, setVerified}}>
       {children}
     </MyContext.Provider>
   );

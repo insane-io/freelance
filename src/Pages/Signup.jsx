@@ -1,20 +1,20 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { MyContext } from "../../Context/MyContext";
+import { MyContext } from "../Context/MyContext";
 import { GoogleLogin } from "@react-oauth/google";
 
 const Signup = () => {
-    const { setOnboarding, onboarding } = useContext(MyContext);
+    const { setLogin } = useContext(MyContext);
     const [token, setToken] = useState()
     const [formData, setFormData] = useState({
         email: "",
         password1: "",
+        password2: "",
         first_name: "",
         last_name: "",
+        sex: ""
     });
-
-    console.log("form", formData)
 
     const navigate = useNavigate();
 
@@ -23,46 +23,33 @@ const Signup = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    // const handleSave = async (event) => {
-    //     if (event) {
-    //         event.preventDefault();
-    //     }
-    //     try {
-    //         const res = await axios.post("http://127.0.0.1:8000/user/signup/", {
-    //             email: formData.email,
-    //             first_name: formData.first_name,
-    //             last_name: formData.last_name,
-    //             password: formData.password1,
-    //         }, {
-    //             headers: {
-    //                 Authorization: localStorage.getItem('access_token')
-    //                     ? 'Bearer ' + localStorage.getItem('access_token')
-    //                     : null,
-    //                 'Content-Type': 'application/json',
-    //                 accept: 'application/json',
-    //             },
-    //         });
-    //         localStorage.setItem("access_token", res.data.access);
-    //         localStorage.setItem("refresh_token", res.data.refresh);
-    //         navigate("/profession");
-    //         setLogin(true);
-    //         console.log(res.data);
-    //     } catch (error) {
-    //         console.error("Error:", error);
-    //     }
-    // };
-
-    const handleSave = () => {
-        const updatedOnboarding = {
-            ...onboarding,  
-            email: formData.email,
-            password: formData.password1,
-            first_name: formData.first_name,
-            last_name: formData.last_name,
-        };
-        setOnboarding(updatedOnboarding);
-        console.log(updatedOnboarding);  
-        navigate("/profession");
+    const handleSave = async (event) => {
+        if (event) {
+            event.preventDefault();
+        }
+        try {
+            const res = await axios.post("http://127.0.0.1:8000/user/signup/", {
+                email: formData.email,
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+                password: formData.password1,
+            }, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token')
+                        ? 'Bearer ' + localStorage.getItem('access_token')
+                        : null,
+                    'Content-Type': 'application/json',
+                    accept: 'application/json',
+                },
+            });
+            localStorage.setItem("access_token", res.data.access);
+            localStorage.setItem("refresh_token", res.data.refresh);
+            navigate("/");
+            setLogin(true);
+            console.log(res.data);
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
 
     return (
@@ -101,7 +88,7 @@ const Signup = () => {
                         </label>
                         <input className="rounded-md w-full py-3 px-3 focus:outline-none bg-[#E6E0E9]" id="user-password" name="password1" type="password" placeholder="******************" onChange={(e) => handleChange(e)} required />
                     </div>
-                    <div className="flex justify-between items-center">
+                    {/* <div className="flex justify-between items-center">
                         <div className="h-1 bg-gray-300 rounded-full w-2/5"></div>
                         <h1>OR</h1>
                         <div className="h-1 bg-gray-300 rounded-full w-2/5"></div>
@@ -110,13 +97,13 @@ const Signup = () => {
                         <GoogleLogin
                             onSuccess={credentialResponse => {
                                 setToken(credentialResponse.credential);
-                                navigate("/profession")
+                                console.log(credentialResponse.credential);
                             }}
                             onError={() => {
                                 console.log('Login Failed');
                             }}
                         />
-                    </div>
+                    </div> */}
                     <button className="bg-[#DF73FF] hover:bg-gray-900 w-full text-white font-thin py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline" onClick={handleSave}>
                         Join
                     </button>
