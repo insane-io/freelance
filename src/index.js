@@ -18,6 +18,7 @@ import Freeprofile from "./Pages/Freeprofile";
 import Admin from './Pages/Admin';
 import Details from './Pages/Details';
 import Stats from './Pages/Stats';
+import Upload from './Pages/Upload';
 
 const router = createBrowserRouter(
   createRoutesFromChildren(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="freelancerprofile" element={<Freeprofile />} />
       <Route path="stats" element={<Stats/>} />
       <Route path="verify" element={<Verify/>} />
+      <Route path="upload" element={<Upload/>} />
     </Route>
   )
 );

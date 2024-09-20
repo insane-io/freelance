@@ -56,21 +56,8 @@ const Login = () => {
 
     return (
         <>
-            <div className="grid grid-cols-5 ">
-                <div className="col-span-3 my-20 ms-40">
-                    <div className="ms-10" style={{ width: '60vw', height: '60vh', overflow: 'hidden' }}>
-                        <video
-                            style={{ width: '60%', height: '100%', objectFit: 'cover' }}
-                            loop
-                            muted
-                            autoPlay
-                        >
-                            <source src="" type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
-                <div className="col-span-2 m-16 flex flex-col justify-center" >
+            <div className="mx-[30rem]">
+                <div className=" m-16 border-2 p-5 rounded-xl flex flex-col justify-center" >
                     <h1 style={{ fontSize: '2rem', textAlign: 'center', fontWeight: 'bold', margin: '20px 0' }}>
                         Login
                     </h1>
@@ -79,7 +66,7 @@ const Login = () => {
                     </label>
                     <input
                         id="user-email"
-                        className="rounded-md w-full py-3 px-3  focus:outline-none bg-[#E3FEF0]"
+                        className="rounded-md w-full py-3 px-3  focus:outline-none bg-[#E6E0E9]"
                         type="email"
                         name="email"
                         placeholder="Email"
@@ -93,14 +80,14 @@ const Login = () => {
                     </label>
                     <input
                         id="user-password"
-                        className="rounded-md w-full py-3 px-3  focus:outline-none bg-[#E3FEF0]"
+                        className="rounded-md w-full py-3 px-3  focus:outline-none bg-[#E6E0E9]"
                         type="password"
                         name="password"
                         placeholder="******"
                         onChange={(e) => handleChange(e)}
                         required
                     />
-                    <GoogleLogin
+                    {/* <GoogleLogin
                         onSuccess={credentialResponse => {
                             setToken(credentialResponse.credential);
                             console.log(credentialResponse.credential);
@@ -108,14 +95,14 @@ const Login = () => {
                         onError={(error) => {
                             console.log('Login Failed', error);
                         }}
-                    />
+                    /> */}
                     <div className="form-border"></div>
                     <input
                         id="submit-btn"
                         type="submit"
                         name="submit"
                         value="LOGIN"
-                        className="bg-[#0A9D50] hover:bg-gray-900 w-full mt-3 cursor-pointer text-white font-thin py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
+                        className="bg-[#DF73FF] hover:bg-gray-900 w-full mt-3 cursor-pointer text-white font-thin py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
                         onClick={handleSubmit}
                     />
                     <Link href="#" id="signup">

@@ -7,7 +7,7 @@ const UserProvider = ({ children }) => {
   const [onboarding, setOnboarding] = useState([])
   const [url, setUrl] = useState()
   const [role, setRole] = useState()
-  const [verified, setVerified] = useState(true)
+  const [verified, setVerified] = useState(-1)
 
   console.log(url)
   console.log("onboarding",onboarding)

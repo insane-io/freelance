@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Verify = () => {
+const Upload_Videos = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Verify = () => {
   )
 }
 
-export default Verify
+export default Upload_Videos
