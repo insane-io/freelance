@@ -12,7 +12,7 @@ const Home = () => {
                         <span className='text-7xl font-normal text-[#6C6C6C]'>Between You And</span>
                         <br/>
                         
-                        <span className='text-7xl font-normal text-[#6C6C6C]'>Customers</span>
+                        <span className='text-7xl font-normal text-[#6C6C6C]'>Clients</span>
                         <br/>
                         
                     </p>
