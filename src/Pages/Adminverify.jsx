@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import home1 from '../Assets/home1.png';
 
 const Adminverify = () => {
   // Example data for one candidate and their documents
@@ -6,7 +7,7 @@ const Adminverify = () => {
     name: 'John Doe',
     email: 'john@example.com',
     documents: [
-      { docName: 'ID Proof', verified: null, content: 'This is the ID Proof document' },
+      { docName: 'ID Proof', verified: null, content: home1 },
       { docName: 'Resume', verified: null, content: 'This is the Resume document' },
     ],
   });
@@ -85,7 +86,7 @@ const Adminverify = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full relative">
             <h3 className="text-xl font-bold mb-4">{selectedDocument.docName}</h3>
-            <p className="mb-6">{selectedDocument.content}</p>
+            <img src={selectedDocument.content} className="mb-6"/>
 
             {/* Verify / Not Verify Buttons */}
             <div className="flex justify-between">
