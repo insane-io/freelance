@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { MyContext } from '../../Context/MyContext';
 import { useNavigate } from 'react-router-dom';
-import img from "../../Assets/undraw_professional_card_otb4 1.svg"
 
 const Skills = () => {
     const navigate = useNavigate();
@@ -23,6 +22,16 @@ const Skills = () => {
         }
         setSkill('');
     };
+
+    const handleNext = () => {
+        const updatedOnboarding = {
+            ...onboarding, 
+            skills: data 
+        };
+        setOnboarding(updatedOnboarding);
+        console.log(updatedOnboarding);
+        navigate("/experience")
+    }
 
     const removeSkill = (indexToRemove) => {
         const updatedData = data.filter((_, index) => index !== indexToRemove);
@@ -74,7 +83,7 @@ const Skills = () => {
             <div className='mt-7 flex justify-center w-2/6'>
                 <button
                     className='py-2 px-8 bg-blue-400 text-white rounded-lg'
-                    onClick={()=>navigate("/experience")}
+                    onClick={handleNext}
                 >
                     Next
                 </button>

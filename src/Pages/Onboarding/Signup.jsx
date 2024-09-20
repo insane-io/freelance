@@ -5,15 +5,16 @@ import { MyContext } from "../../Context/MyContext";
 import { GoogleLogin } from "@react-oauth/google";
 
 const Signup = () => {
-    const { setLogin } = useContext(MyContext);
+    const { setOnboarding, onboarding } = useContext(MyContext);
     const [token, setToken] = useState()
     const [formData, setFormData] = useState({
         email: "",
         password1: "",
-        password2: "",
         first_name: "",
         last_name: "",
     });
+
+    console.log("form", formData)
 
     const navigate = useNavigate();
 
@@ -22,33 +23,46 @@ const Signup = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSave = async (event) => {
-        if (event) {
-            event.preventDefault();
-        }
-        try {
-            const res = await axios.post("http://127.0.0.1:8000/user/signup/", {
-                email: formData.email,
-                first_name: formData.first_name,
-                last_name: formData.last_name,
-                password: formData.password1,
-            }, {
-                headers: {
-                    Authorization: localStorage.getItem('access_token')
-                        ? 'Bearer ' + localStorage.getItem('access_token')
-                        : null,
-                    'Content-Type': 'application/json',
-                    accept: 'application/json',
-                },
-            });
-            localStorage.setItem("access_token", res.data.access);
-            localStorage.setItem("refresh_token", res.data.refresh);
-            navigate("/skills");
-            setLogin(true);
-            console.log(res.data);
-        } catch (error) {
-            console.error("Error:", error);
-        }
+    // const handleSave = async (event) => {
+    //     if (event) {
+    //         event.preventDefault();
+    //     }
+    //     try {
+    //         const res = await axios.post("http://127.0.0.1:8000/user/signup/", {
+    //             email: formData.email,
+    //             first_name: formData.first_name,
+    //             last_name: formData.last_name,
+    //             password: formData.password1,
+    //         }, {
+    //             headers: {
+    //                 Authorization: localStorage.getItem('access_token')
+    //                     ? 'Bearer ' + localStorage.getItem('access_token')
+    //                     : null,
+    //                 'Content-Type': 'application/json',
+    //                 accept: 'application/json',
+    //             },
+    //         });
+    //         localStorage.setItem("access_token", res.data.access);
+    //         localStorage.setItem("refresh_token", res.data.refresh);
+    //         navigate("/profession");
+    //         setLogin(true);
+    //         console.log(res.data);
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //     }
+    // };
+
+    const handleSave = () => {
+        const updatedOnboarding = {
+            ...onboarding,  
+            email: formData.email,
+            password: formData.password1,
+            first_name: formData.first_name,
+            last_name: formData.last_name,
+        };
+        setOnboarding(updatedOnboarding);
+        console.log(updatedOnboarding);  
+        navigate("/profession");
     };
 
     return (
@@ -96,7 +110,7 @@ const Signup = () => {
                         <GoogleLogin
                             onSuccess={credentialResponse => {
                                 setToken(credentialResponse.credential);
-                                navigate("/skills")
+                                navigate("/profession")
                             }}
                             onError={() => {
                                 console.log('Login Failed');

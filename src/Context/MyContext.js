@@ -5,9 +5,14 @@ const UserProvider = ({ children }) => {
   const [login, setLogin] = useState(!!localStorage.getItem("access_token"));
   const [chathistory, setHistory] = useState(true)
   const [onboarding, setOnboarding] = useState([])
+  const [url, setUrl] = useState()
+  const [role, setRole] = useState()
+
+  console.log(url)
+  console.log("onboarding",onboarding)
   
   return (
-    <MyContext.Provider value={{login, setLogin, chathistory, setHistory, onboarding, setOnboarding}}>
+    <MyContext.Provider value={{login, setLogin, chathistory, setHistory, onboarding, setOnboarding, url, setUrl, role, setRole}}>
       {children}
     </MyContext.Provider>
   );

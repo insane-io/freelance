@@ -15,6 +15,7 @@ import Choose_Profession from './Pages/Onboarding/Choose_Profession';
 import Profession from './Pages/Onboarding/Profession';
 import Skills from './Pages/Onboarding/Skills';
 import Experience from './Pages/Onboarding/Experience';
+import Education from './Pages/Onboarding/Education';
 
 const router = createBrowserRouter(
   createRoutesFromChildren(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
         <Route path='profession' element={<Profession/>} />
         <Route path='skills' element={<Skills/>} />
         <Route path='experience' element={<Experience/>} />
+        <Route path='education' element={<Education/>} />
       </Route>
     </Route>
   )

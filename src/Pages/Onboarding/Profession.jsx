@@ -9,12 +9,15 @@ const Choose_Profession = () => {
     const { onboarding, setOnboarding } = useContext(MyContext);
     
     const handleNext = () => {
-        setOnboarding(prevState => ({
-            ...prevState,
-            role: role
-        }));
+        const updatedOnboarding = {
+            ...onboarding,  // Keep existing fields in the onboarding object
+            profession: role // Add the profession field
+        };
+        setOnboarding(updatedOnboarding);
+        console.log(updatedOnboarding);  // This will log the updated onboarding object
         navigate("/skills");
     }
+    
 
     const professions = ["Software Engineer", "Teacher", "UI/UX Designer", "Physics Researcher"];
 
