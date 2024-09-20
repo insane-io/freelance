@@ -6,23 +6,28 @@ import { Route, RouterProvider } from 'react-router-dom';
 import { createBrowserRouter, createRoutesFromChildren } from 'react-router-dom';
 import BaseLayout from './BaseLayout';
 import Home from './Pages/Home';
-import Chat from './Pages/Chat';
+// import Chat from './Pages/Chat';
 import Login from './Pages/Login';
-import Signup from "./Pages/Signup"
+import Signup from "./Pages/Onboarding/Signup";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { UserProvider } from './Context/MyContext';
 import Choose_Profession from './Pages/Onboarding/Choose_Profession';
+import Profession from './Pages/Onboarding/Profession';
+import Skills from './Pages/Onboarding/Skills';
+import Experience from './Pages/Onboarding/Experience';
 
 const router = createBrowserRouter(
   createRoutesFromChildren(
     <Route>
       <Route path='/' element={<BaseLayout />} >
         <Route path='' element={<Home />} />
-        <Route path='chat' element={<Chat />} />
+        {/* <Route path='chat' element={<Chat />} /> */}
         <Route path='login' element={<Login />} />
-        <Route path='signup' element={<Signup />} >
-        <Route path='choose-profession' element={<Choose_Profession/>}/>
-        </Route>
+        <Route path='choose-profession' element={<Choose_Profession />} />
+        <Route path='details' element={<Signup />} />
+        <Route path='profession' element={<Profession/>} />
+        <Route path='skills' element={<Skills/>} />
+        <Route path='experience' element={<Experience/>} />
       </Route>
     </Route>
   )

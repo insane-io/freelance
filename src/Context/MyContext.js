@@ -4,9 +4,10 @@ export const MyContext = createContext("");
 const UserProvider = ({ children }) => {
   const [login, setLogin] = useState(!!localStorage.getItem("access_token"));
   const [chathistory, setHistory] = useState(true)
+  const [onboarding, setOnboarding] = useState([])
   
   return (
-    <MyContext.Provider value={{login, setLogin, chathistory, setHistory}}>
+    <MyContext.Provider value={{login, setLogin, chathistory, setHistory, onboarding, setOnboarding}}>
       {children}
     </MyContext.Provider>
   );
