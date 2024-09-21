@@ -13,7 +13,7 @@ const Signup = () => {
         password2: "",
         first_name: "",
         last_name: "",
-        sex: ""
+        phone_no: ""
     });
 
     const navigate = useNavigate();
@@ -28,11 +28,12 @@ const Signup = () => {
             event.preventDefault();
         }
         try {
-            const res = await axios.post("http://127.0.0.1:8000/user/signup/", {
+            const res = await axios.post("http://13.60.236.4:8000/user/register/teacher/", {
                 email: formData.email,
                 first_name: formData.first_name,
                 last_name: formData.last_name,
                 password: formData.password1,
+                phone_no: formData.phone_no,
             }, {
                 headers: {
                     Authorization: localStorage.getItem('access_token')
@@ -44,7 +45,7 @@ const Signup = () => {
             });
             localStorage.setItem("access_token", res.data.access);
             localStorage.setItem("refresh_token", res.data.refresh);
-            navigate("/");
+            navigate("/freelancerprofile");
             setLogin(true);
             console.log(res.data);
         } catch (error) {
@@ -54,11 +55,11 @@ const Signup = () => {
 
     return (
         <>
-            <div className=" flex justify-center my-6">
-                <form className="bg-white">
+            <div className=" flex justify-center my-4 ">
+                <form className="bg-white border-2 rounded-xl p-5">
                     <div className="mb-4 flex flex-col items-center">
-                        <h1 className="text-3xl font-semibold my-5">
-                            Sign up to find your next gig
+                        <h1 className="text-3xl font-semibold my-2">
+                            Sign up
                         </h1>
                         <div className="flex gap-3">
                             <div className="">
@@ -86,7 +87,13 @@ const Signup = () => {
                         <label className="block  text-sm font-bold mb-2" htmlFor="password" >
                             Password
                         </label>
-                        <input className="rounded-md w-full py-3 px-3 focus:outline-none bg-[#E6E0E9]" id="user-password" name="password1" type="password" placeholder="******************" onChange={(e) => handleChange(e)} required />
+                        <input className="rounded-md w-full py-3 px-3 focus:outline-none bg-[#E6E0E9]" id="user-password" name="password1" type="password" placeholder="********" onChange={(e) => handleChange(e)} required />
+                    </div>
+                    <div className="mb-6">
+                        <label className="block  text-sm font-bold mb-2" htmlFor="password" >
+                            Phone
+                        </label>
+                        <input className="rounded-md w-full py-3 px-3 focus:outline-none bg-[#E6E0E9]" id="phone_no" name="phone_no" type="number" placeholder="Phone No." onChange={(e) => handleChange(e)} required />
                     </div>
                     {/* <div className="flex justify-between items-center">
                         <div className="h-1 bg-gray-300 rounded-full w-2/5"></div>

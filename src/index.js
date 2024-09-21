@@ -18,11 +18,13 @@ import Verify from "./Pages/Verify";
 import "./index.css";
 import Freeprofile from "./Pages/Freeprofile";
 // import Mygig from "./Pages/Mygig";
-import Admin from "./Pages/Admin";
-import Details from "./Pages/Details";
-import Stats from "./Pages/Stats";
-import Requests from "./Pages/Requests";
-import Adminverify from "./Pages/Adminverify";
+import Admin from './Pages/Admin';
+import Details from './Pages/Details';
+import Stats from './Pages/Stats';
+import Upload from './Pages/Upload';
+import Adminverify from './Pages/AdminVerify';
+import Video from './Pages/Video';
+import Verify1 from './Pages/Verify1';
 
 const router = createBrowserRouter(
   createRoutesFromChildren(
@@ -34,9 +36,12 @@ const router = createBrowserRouter(
       <Route path="adminverify" element={<Adminverify />} />
       <Route path="details" element={<Details />} />
       <Route path="freelancerprofile" element={<Freeprofile />} />
-      <Route path="stats" element={<Stats />} />
-      <Route path="verify" element={<Verify />} />
-      <Route path="requests" element={<Requests />} />
+      <Route path="stats" element={<Stats/>} />
+      <Route path="verify" element={<Verify/>} />
+      <Route path="verify1" element={<Verify1/>} />
+      <Route path="upload" element={<Upload/>} />
+      <Route path="admin-verify/:id" element={<Adminverify/>} />
+      <Route path="video/:id" element={<Video/>} />
     </Route>
   )
 );
