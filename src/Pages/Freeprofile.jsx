@@ -23,6 +23,7 @@ const Freeprofile = () => {
                     }
                 })
                 setData(res.data)
+                localStorage.setItem("is_verified", res.data.is_verified)
                 setVerified(res.data.is_verified)
                 console.log(res.data)
                 setStatus(res.data.status)

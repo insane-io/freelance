@@ -1,19 +1,14 @@
 import axios from 'axios';
-import React, { useState, useRef, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
-import { MyContext } from '../Context/MyContext';
 
 const Verify = () => {
   const [permit, setPermit] = useState(false);
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     webcamPhoto: null,
     adhaarPhoto: null,
     qualification: null,
   });
-
-  const { status } = useContext(MyContext);
 
   const webcamRef = useRef(null);
 
@@ -52,21 +47,11 @@ const Verify = () => {
   // Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     const formDataToSend = new FormData();
-    
-    // Ensure all files are mapped correctly
-    if (formData.webcamPhoto) {
-      formDataToSend.append('webcam_photo', formData.webcamPhoto);
-    }
-    
-    if (formData.adhaarPhoto) {
-      formDataToSend.append('adhaar_card', formData.adhaarPhoto);
-    }
-    
-    if (formData.qualification) {
-      formDataToSend.append('degree_certificate', formData.qualification);
-    }
+    formDataToSend.append('pic', formData.webcamPhoto);
+    formDataToSend.append('adhaar_card', formData.adhaarPhoto);
+    formDataToSend.append('degree_certificate', formData.qualification);
 
     try {
       const res = await axios.post("http://13.60.236.4:8000/user/upload_docs/", formDataToSend, {
@@ -79,7 +64,6 @@ const Verify = () => {
         },
       });
       console.log(res);
-      navigate('/');
     } catch (error) {
       console.error('Error uploading data:', error);
     }
@@ -101,6 +85,7 @@ const Verify = () => {
         <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-bold mb-6">User Information Form</h2>
           <form onSubmit={handleSubmit}>
+            {/* Webcam Input */}
             <div className="mb-6">
               <label className="block text-gray-700 font-semibold mb-2">
                 Take a photo using Webcam

@@ -2,15 +2,12 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MyContext } from "../Context/MyContext";
-import { GoogleLogin } from "@react-oauth/google";
 
 const Signup = () => {
     const { setLogin } = useContext(MyContext);
-    const [token, setToken] = useState()
     const [formData, setFormData] = useState({
         email: "",
         password1: "",
-        password2: "",
         first_name: "",
         last_name: "",
         phone_no: ""

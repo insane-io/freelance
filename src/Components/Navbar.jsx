@@ -34,7 +34,7 @@ const Navbar = () => {
                 <NavLink to="/" className={({ isActive }) => isActive ? "text-[#61007E] font-bold" : "text-black"}>Home</NavLink>
               </li>
               {
-                verified == 1 ? (
+                verified ? (
                   <>
                     <li>
                       <NavLink to="/stats" className={({ isActive }) => isActive ? "text-[#61007E] font-bold" : "text-black"}>Stats</NavLink>
@@ -43,7 +43,7 @@ const Navbar = () => {
                       <NavLink to="/upload" className={({ isActive }) => isActive ? "text-[#61007E] font-bold" : "text-black"}>Upload</NavLink>
                     </li>
                   </>
-                ) : verified == -1 || verified == 0 ? (
+                ) : !verified ? (
                   <><li>
                     <NavLink to="/verify" className={({ isActive }) => isActive ? "text-[#61007E] font-bold" : "text-black"}>Verify</NavLink>
                   </li>

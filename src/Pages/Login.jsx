@@ -13,22 +13,21 @@ const Login = () => {
         password: "",
     });
 
-    useEffect(() => {
-        if (token) {
-            axios.post('http://13.60.236.4:8000/api/google-login/', { token })
-                .then(response => {
-                    console.log('Logged in ', response);
-                    localStorage.setItem("access_token", response.data.access);
-                    localStorage.setItem("refresh_token", response.data.refresh);
-                    navigate("/freelancerprofile");
-                    setLogin(true)
-                    console.log(response.data)
-                })
-                .catch(error => {
-                    console.error('error', error);
-                });
-        }
-    }, [token, navigate]);
+    // useEffect(() => {
+    //     if (token) {
+    //         axios.post('http://13.60.236.4:8000/api/google-login/', { token })
+    //             .then(response => {
+    //                 console.log('Logged in ', response);
+    //                 localStorage.setItem("access_token", response.data.access)
+    //                 localStorage.setItem("refresh_token", response.data.refresh)
+    //                 navigate("/freelancerprofile");
+    //                 setLogin(true)
+    //             })
+    //             .catch(error => {
+    //                 console.error('error', error);
+    //             });
+    //     }
+    // }, [token, navigate]);
 
 
     const handleChange = (e) => {
@@ -43,7 +42,6 @@ const Login = () => {
         postData.append("password", formData.password);
 
         try {
-            console.log(postData);
             const res = await axios.post(`http://13.60.236.4:8000/user/login/`, postData);
             localStorage.setItem("access_token", res.data.access);
             localStorage.setItem("refresh_token", res.data.refresh);

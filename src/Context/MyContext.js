@@ -5,7 +5,7 @@ const UserProvider = ({ children }) => {
   const [login, setLogin] = useState(!!localStorage.getItem("access_token"));
   const [url, setUrl] = useState()
   const [role, setRole] = useState()
-  const [verified, setVerified] = useState()
+  const [verified, setVerified] = useState(localStorage.getItem("is_verified"));
   const [status, setStatus] = useState()
 
   console.log("verified", verified)

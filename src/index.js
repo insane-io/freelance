@@ -14,12 +14,8 @@ import { UserProvider } from './Context/MyContext';
 import Verify from "./Pages/Verify"
 import "./index.css";
 import Freeprofile from "./Pages/Freeprofile";
-// import Mygig from "./Pages/Mygig";
-import Admin from './Pages/Admin';
-import Details from './Pages/Details';
 import Stats from './Pages/Stats';
 import Upload from './Pages/Upload';
-import Adminverify from './Pages/AdminVerify';
 import Video from './Pages/Video';
 
 const router = createBrowserRouter(
@@ -28,13 +24,10 @@ const router = createBrowserRouter(
       <Route path='' element={<Home />} />
       <Route path='login' element={<Login />} />
       <Route path="signup" element={<Signup />} />
-      <Route path="admin" element={<Admin />} />
-      <Route path="details" element={<Details/>} />
       <Route path="freelancerprofile" element={<Freeprofile />} />
       <Route path="stats" element={<Stats/>} />
       <Route path="verify" element={<Verify/>} />
       <Route path="upload" element={<Upload/>} />
-      <Route path="admin-verify/:id" element={<Adminverify/>} />
       <Route path="video/:id" element={<Video/>} />
     </Route>
   )
