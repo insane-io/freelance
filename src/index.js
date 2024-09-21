@@ -19,6 +19,8 @@ import Admin from './Pages/Admin';
 import Details from './Pages/Details';
 import Stats from './Pages/Stats';
 import Upload from './Pages/Upload';
+import Adminverify from './Pages/AdminVerify';
+import Video from './Pages/Video';
 
 const router = createBrowserRouter(
   createRoutesFromChildren(
@@ -32,6 +34,8 @@ const router = createBrowserRouter(
       <Route path="stats" element={<Stats/>} />
       <Route path="verify" element={<Verify/>} />
       <Route path="upload" element={<Upload/>} />
+      <Route path="admin-verify/:id" element={<Adminverify/>} />
+      <Route path="video/:id" element={<Video/>} />
     </Route>
   )
 );

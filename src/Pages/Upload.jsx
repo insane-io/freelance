@@ -12,11 +12,11 @@ const Upload = () => {
 
     const handleClick = (value) => {
         setType(value);
-        setModal(true);  // Open the modal when a button is clicked
+        setModal(true); 
     };
 
     const toggleModal = () => {
-        setModal(!modal);  // Toggle modal visibility
+        setModal(!modal); 
     };
 
     return (

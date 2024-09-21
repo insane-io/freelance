@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../Context/MyContext";
-import { GoogleLogin } from '@react-oauth/google';
 
 
 const Login = () => {
@@ -16,20 +15,21 @@ const Login = () => {
 
     useEffect(() => {
         if (token) {
-            axios.post('http://127.0.0.1:8000/api/google-login/', { token })
+            axios.post('http://13.60.236.4:8000/api/google-login/', { token })
                 .then(response => {
                     console.log('Logged in ', response);
                     localStorage.setItem("access_token", response.data.access);
                     localStorage.setItem("refresh_token", response.data.refresh);
-                    navigate("/");
+                    navigate("/freelancerprofile");
                     setLogin(true)
+                    console.log(response.data)
                 })
                 .catch(error => {
                     console.error('error', error);
-                    // toast.error("Invalid Credentials");
                 });
         }
     }, [token, navigate]);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -44,10 +44,11 @@ const Login = () => {
 
         try {
             console.log(postData);
-            const res = await axios.post(`http://127.0.0.1:8000/user/login/`, postData);
+            const res = await axios.post(`http://13.60.236.4:8000/user/login/`, postData);
             localStorage.setItem("access_token", res.data.access);
             localStorage.setItem("refresh_token", res.data.refresh);
-            navigate("/");
+            console.log(res.data)
+            navigate("/freelancerprofile");
             setLogin(true)
         } catch (error) {
             console.error("Error:", error);

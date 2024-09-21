@@ -28,7 +28,7 @@ const Signup = () => {
             event.preventDefault();
         }
         try {
-            const res = await axios.post("http://127.0.0.1:8000/user/register/teacher/", {
+            const res = await axios.post("http://13.60.236.4:8000/user/register/teacher/", {
                 email: formData.email,
                 first_name: formData.first_name,
                 last_name: formData.last_name,
@@ -45,7 +45,7 @@ const Signup = () => {
             });
             localStorage.setItem("access_token", res.data.access);
             localStorage.setItem("refresh_token", res.data.refresh);
-            navigate("/");
+            navigate("/freelancerprofile");
             setLogin(true);
             console.log(res.data);
         } catch (error) {

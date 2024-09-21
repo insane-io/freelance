@@ -7,15 +7,15 @@ import { useNavigate } from 'react-router-dom';
 
 const Freeprofile = () => {
     const [data, setData] = useState([])
-    const { verified } = useContext(MyContext)
+    const { verified, setLogin, setVerified, setStatus } = useContext(MyContext)
     const navigate = useNavigate()
 
-    console.log(verified)
+    console.log("verified", verified)
 
     useEffect(() => {
         async function getData() {
             try {
-                const res = await axios.get("http://127.0.0.1:8000/user/profile/teacher/", {
+                const res = await axios.get("http://13.60.236.4:8000/user/profile/teacher/", {
                     headers: {
                         Authorization: localStorage.getItem('access_token')
                             ? 'Bearer ' + localStorage.getItem('access_token')
@@ -23,36 +23,36 @@ const Freeprofile = () => {
                     }
                 })
                 setData(res.data)
+                setVerified(res.data.is_verified)
+                console.log(res.data)
+                setStatus(res.data.status)
             } catch (error) {
                 console.log(error)
             }
         }
         getData()
     }, [])
+
+    const LogOut = () => {
+        localStorage.clear();
+        navigate('/login')
+        setLogin(false)
+    }
     return (
         <div className="mt-24 flex items-center justify-center py-8">
             <div className="relative bg-[#F0F0F0] w-full rounded-lg shadow-md mx-16 p-6 pt-16">
-                {/* Profile Image */}
                 <div className="absolute -top-20 left-1/2 transform -translate-x-1/2">
                     <div className="w-48 h-48 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden border-4 border-white">
-                        {/* Replace with actual image */}
                         <img
-                            // src={data?.user?.profile_pic === null ? {prof} : data?.user?.profile_pic}
-                            // src={prof}
                             src={`https://api.dicebear.com/9.x/identicon/svg?seed=${data.user?.first_name}`}
-                            // alt="Profile Logo"
                             className="w-full h-full object-cover"
                         />
                     </div>
                 </div>
-                {/* Content Below Image */}
                 <div className="flex flex-col items-center mt-12">
-                    {/* Name */}
                     <h2 className="text-2xl font-semibold mt-1">{data.user?.first_name} {data.user?.last_name}</h2>
-
-                    {/* Star Ratings */}
                     {
-                        verified === 1 ? (
+                        verified === true ? (
                             <>
                                 <div className="flex items-center mt-2">
                                     <div className="flex items-center">
@@ -63,8 +63,9 @@ const Freeprofile = () => {
                                         <span className="text-gray-300"><FaStar className="size-8" color="#D1D5DB" /></span>
                                     </div>
                                     <span className="ml-2 text-2xl font-bold text-gray-600">3</span>
-                                    <BiSolidCommentDetail className='ml-8 size-8 mr-2' color="#A855F7" />89
+                                    {/* <BiSolidCommentDetail className='ml-8 size-8 mr-2' color="#A855F7" />89 */}
                                 </div>;
+                                <button onClick={LogOut} className='bg-red-400 py-2 px-6 rounded-xl my-5'>Logout</button>
 
                                 <div className="mt-10 w-full flex justify-between">
                                     <h3 className="text-5xl font-bold mb-4">Latest Videos</h3>
@@ -91,8 +92,6 @@ const Freeprofile = () => {
                                             </p>
                                             <p className="mt-2 font-semibold">- John Doe</p>
                                         </div>
-
-                                        {/* Review Item 2 */}
                                         <div className="bg-white p-6 rounded-lg shadow-md">
                                             <div className="flex items-center">
                                                 <FaStar className="text-purple-400" />
@@ -142,14 +141,14 @@ const Freeprofile = () => {
                                     </div>
                                 </div>
                             </>
-                        ) : verified === 0 || verified === -1 ? (
+                        ) : (
                             <>
                                 <h1 className='text-3xl mt-5'>This is an unverified Account, Please Verify</h1>
-                                <button onClick={()=>navigate("/verify")} className='bg-purple-400 px-4 py-2 mt-5 rounded-xl'>Verify</button>
+                                <button onClick={() => navigate("/verify")} className='bg-purple-400 text-white px-6 py-2 text-xl mt-5 rounded-xl'>Verify</button>
+                                <button onClick={LogOut} className='bg-red-400 py-2 px-6 rounded-xl my-5'>Logout</button>
                             </>
-                        ) : null
+                        )
                     }
-
                 </div>
             </div>
         </div>

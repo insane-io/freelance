@@ -1,26 +1,46 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
 const Modal_Upload = ({ modal, toggleModal, type }) => {
     const [formData, setFormData] = useState({
-        title: '',
+        video: null,  // Set initial state to null for files
+        thumbnail: null,  // Set initial state to null for files
         description: '',
-        currentlyWorking: false,
     });
 
     const handleInputChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        if (type === 'checkbox') {
-            setFormData({ ...formData, [name]: checked });
+        const { name, type, files, value } = e.target;
+        if (type === 'file') {
+            // For file inputs, save the actual file
+            setFormData({ ...formData, [name]: files[0] });
         } else {
+            // For other inputs, save the value
             setFormData({ ...formData, [name]: value });
         }
     };
 
-    console.log(formData)
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        toggleModal();  
+        const formDataToSend = new FormData();
+        formDataToSend.append('video', formData.video); 
+        formDataToSend.append('thumbnail', formData.thumbnail);
+        formDataToSend.append('description', formData.description); 
+
+        try {
+            const res = await axios.post('http://13.60.236.4:8000/user/upload_video/', formDataToSend, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token')
+                        ? `Bearer ${localStorage.getItem('access_token')}`
+                        : null,
+                    'Content-Type': 'multipart/form-data', 
+                    accept: 'application/json',
+                },
+            });
+            console.log(res.data);
+            toggleModal();
+        } catch (error) {
+            console.error('Error uploading video:', error.response?.data || error.message);
+        }
     };
 
     return (
@@ -35,14 +55,22 @@ const Modal_Upload = ({ modal, toggleModal, type }) => {
                         {type === 'video' ? (
                             <>
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-700">Video Title *</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-700">Video</label>
                                     <input
                                         type="file"
-                                        name="title"
-                                        value={formData.title}
+                                        name="video"
                                         onChange={handleInputChange}
                                         className="block w-full p-2.5 border rounded-lg"
-                                        placeholder="Enter Video Title"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block mb-2 text-sm font-medium text-gray-700">ThumbNail</label>
+                                    <input
+                                        type="file"
+                                        name="thumbnail"
+                                        onChange={handleInputChange}
+                                        className="block w-full p-2.5 border rounded-lg"
                                         required
                                     />
                                 </div>

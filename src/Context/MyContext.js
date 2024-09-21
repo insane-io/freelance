@@ -3,17 +3,15 @@ export const MyContext = createContext("");
 
 const UserProvider = ({ children }) => {
   const [login, setLogin] = useState(!!localStorage.getItem("access_token"));
-  const [chathistory, setHistory] = useState(true)
-  const [onboarding, setOnboarding] = useState([])
   const [url, setUrl] = useState()
   const [role, setRole] = useState()
-  const [verified, setVerified] = useState(-1)
+  const [verified, setVerified] = useState()
+  const [status, setStatus] = useState()
 
-  console.log(url)
-  console.log("onboarding",onboarding)
+  console.log("verified", verified)
   
   return (
-    <MyContext.Provider value={{login, setLogin, chathistory, setHistory, onboarding, setOnboarding, url, setUrl, role, setRole, verified, setVerified}}>
+    <MyContext.Provider value={{login, setLogin, role, setRole, verified, setVerified, status, setStatus}}>
       {children}
     </MyContext.Provider>
   );
